@@ -1,3 +1,5 @@
+import motor.motor_tornado
+
 import admin_commands
 import configs
 import handlers
@@ -17,6 +19,12 @@ BOT_TOKEN = configs.BOT_TOKEN
 bot = Bot(BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 storage = MongoStorage(uri=configs.MONGO_URL)
 dp = Dispatcher(bot, storage=storage)
+
+
+# client = motor.motor_tornado.MotorClient(configs.MONGO_URL)
+client = motor.motor_tornado.MotorClient('localhost', 27017)
+db = client.motor
+
 
 # Setup i18n middleware
 i18n = configs.Localization(configs.I18N_DOMAIN,
