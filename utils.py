@@ -1,6 +1,9 @@
 import os
 
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class WikiApi:
@@ -26,15 +29,13 @@ class WikiApi:
     def login_request(self):
         PARAMS_1 = {
             'action': "login",
-            'lgname': "Gayrat98Bot",
-            'lgpassword': "zinedine zidane",
+            'lgname': os.getenv("WIKI_LOGIN"),
+            'lgpassword': os.getenv("WIKI_PASS"),
             'lgtoken': self.get_token(),
             'format': "json"
         }
         R = self.S.post(self.URL, data=PARAMS_1)
         DATA = R.json()
-        print(PARAMS_1)
-        print(DATA)
         return DATA
 
     def get_new_pages(self) -> dict:
