@@ -1,9 +1,11 @@
 aiogram==2.18
 aiohttp==3.8.1
 aiosignal==1.2.0
+APScheduler==3.9.1
 async-timeout==4.0.2
 attrs==21.4.0
 Babel==2.9.1
+backports.zoneinfo==0.2.1
 certifi==2021.10.8
 charset-normalizer==2.0.10
 dnspython==2.2.0
@@ -18,4 +20,11 @@ pyflakes==2.4.0
 pymongo==3.12.3
 python-dotenv==0.19.2
 pytz==2021.3
+pytz-deprecation-shim==0.1.0.post0
+requests==2.27.1
+six==1.16.0
+tornado==6.1
+tzdata==2022.1
+tzlocal==4.2
+urllib3==1.26.9
 yarl==1.7.2

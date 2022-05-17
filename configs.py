@@ -2,14 +2,15 @@ import datetime
 import logging
 import os
 
-from pathlib import Path
-from typing import Tuple, Any
+import motor.motor_tornado
+# import pymongo
 
-from aiogram import types
 from aiogram.utils.exceptions import BotBlocked, BotKicked, UserDeactivated
-from aiogram.contrib.middlewares.i18n import I18nMiddleware
 from dotenv import load_dotenv
-from pymongo import MongoClient
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from tzlocal import get_localzone
+
+from tasks import set_scheduled_jobs
 
 load_dotenv()
 
@@ -21,20 +22,13 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_IDS = tuple(os.getenv("ADMIN_IDS").split(","))
 GROUP_ID = int(os.getenv("GROUP_ID"))
 
-
-# Language
-LANG_STORAGE = {}
-LANGS = ["ru", "en", "uz", "uk"]
-I18N_DOMAIN = "mybot"
-BASE_DIR = Path(__file__).parent
-LOCALES_DIR = BASE_DIR / "locales"
-
-
 # Database
 MONGO_URL = os.getenv("MONGO_URL")
-cluster = MongoClient(MONGO_URL)
+# cluster = pymongo.MongoClient(MONGO_URL)
+cluster = motor.motor_tornado.MotorClient(MONGO_URL)
 collusers = cluster.chatbot.users
 collreports = cluster.chatbot.reports
+collwikis = cluster.chatbot.wikis
 
 
 # Telegam supported types
@@ -50,33 +44,15 @@ if not os.getenv("DEBUG"):
         filemode='w',
         format=formatter,
         datefmt='%Y-%m-%d %H:%M:%S',
-        level=logging.WARNING
+        level=logging.INFO
     )
-
-
-class Localization(I18nMiddleware):
-    async def get_user_locale(self, action: str, args: Tuple[Any]) -> str:
-        """
-        User locale getter
-        You can override the method if you want to use different way of getting user language.
-        :param action: event name
-        :param args: event arguments
-        :return: locale name
-        """
-        user: types.User = types.User.get_current()
-
-        if LANG_STORAGE.get(user.id) is None:
-            LANG_STORAGE[user.id] = "en"
-        *_, data = args
-        language = data['locale'] = LANG_STORAGE[user.id]
-        return language
 
 
 # On start polling telegram this function running
 async def on_startup(dp):
-    users_lang = collusers.find({}, {"_id": 1, "lang": 1})
-    for i in users_lang:
-        LANG_STORAGE[i.get("_id")] = i.get("lang", "ru")
+    scheduler = AsyncIOScheduler(timezone=str(get_localzone()))
+    scheduler.start()
+    set_scheduled_jobs(scheduler, dp.bot, collwikis)
     for i in ADMIN_IDS:
         try:
             await dp.bot.send_message(i, "Bot are start!")
