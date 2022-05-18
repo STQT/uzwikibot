@@ -18,7 +18,7 @@ Scalable and straightforward template for bots written on [aiogram](https://gith
 - **Note:** You need to have Virtualenv installed.;
 - Create virtual environment dir: `virtualenv venv` or `python -m venv venv`;
 - Activate your virtualenv: Unix: `source venv/bin/activate` or Win: `venv\Scripts\activate`
-- Rename `dist.env` to `.env` and replace a token placeholder with your own one;
+- Rename `.env.dist` to `.env` and replace a token placeholder with your own one;
 - Install requirement libraries: `pip install -r req.txt`
 - If use MongoDB server:
 -  1. `pip install pymongo[srv]`
