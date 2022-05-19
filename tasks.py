@@ -36,15 +36,16 @@ async def get_last_created_page(bot, collwikis):
             [i for i in new_page_obj])
         for page in new_page_obj:
             vaqt = datetime.strptime(page['timestamp'], "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=5)
-            await bot.send_message(channel_link, "*Yangi sahifa!*\n"
-                                                 "Nomi: [{title}](https://uz.wikipedia.org/wiki/{title})\n"
+            await bot.send_message(channel_link, "<b>Yangi sahifa!</b>\n"
+                                                 "Nomi: <a href=\"https://uz.wikipedia.org/wiki/{title}/\">"
+                                                 "{title}</a>\n"
                                                  "Foydalanuvchi: {user}\n"
                                                  "Hajmi: {newlen}\n"
                                                  "Vaqti: {vaqt}".format(title=page['title'],
                                                                         user=page['user'],
                                                                         newlen=page['newlen'],
                                                                         vaqt=vaqt.strftime("%H:%M:%S")),
-                                   parse_mode="Markdown", disable_web_page_preview=True)
+                                   parse_mode="HTML", disable_web_page_preview=True)
     else:
         logging.info("NO CHANGES")
 
