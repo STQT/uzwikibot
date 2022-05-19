@@ -44,7 +44,7 @@ if not os.getenv("DEBUG"):
         filemode='w',
         format=formatter,
         datefmt='%Y-%m-%d %H:%M:%S',
-        level=logging.INFO
+        level=logging.WARNING
     )
 
 
