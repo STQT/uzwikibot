@@ -47,7 +47,7 @@ async def get_last_created_page(bot, collwikis):
                                                                             vaqt=vaqt.strftime("%H:%M:%S")),
                                        parse_mode="HTML", disable_web_page_preview=True)
             else:
-                await bot.send_message(channel_link, "<a href=\"{fountain_link}\">Fountainda yangi maqola</a><\n"
+                await bot.send_message(channel_link, "<a href=\"{fountain_link}\">Fountainda yangi maqola</a>\n"
                                                      "Nomi: <a href=\"https://uz.wikipedia.org/wiki/{title}\">"
                                                      "{title}</a>\n"
                                                      "Foydalanuvchi: {user}\n"
