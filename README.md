@@ -1,7 +1,7 @@
 ### [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/downloads/)  [![Aiogram](https://img.shields.io/badge/aiogram-2.18-blue)](https://pypi.org/project/aiogram/) 
 
 ### About
-Scalable and straightforward template for bots written on [aiogram](https://github.com/aiogram/aiogram).
+Example: [Here](https://t.me/uzwikinewpages)
 
 ### Setting up
 
