@@ -11,7 +11,8 @@ channel_link = "@uzwikinewpages"
 
 async def get_last_created_page(bot, collwikis):
     data = api.get_new_pages()
-    fountain_link = "https://fountain.toolforge.org/editathons/wiki-stipendiya-marafoni"
+    # fountain_link = "https://fountain.toolforge.org/editathons/wiki-stipendiya-marafoni"
+    fountain_link = "https://fountain.toolforge.org/editathons/wikistipendiyafinal"
     recent_list: list = data['query']['recentchanges']
     for i in recent_list:
         i.update({
