@@ -36,8 +36,7 @@ async def get_last_created_page(bot, collwikis):
             [i for i in new_page_obj])
         for page in new_page_obj:
             vaqt = datetime.strptime(page['timestamp'], "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=5)
-            if page['newlen'] != 27:
-                await bot.send_message(channel_link, "<b>Yangi sahifa!</b>\n"
+            await bot.send_message(channel_link, "<b>Yangi sahifa!</b>\n"
                                                      "Nomi: <a href=\"https://uz.wikipedia.org/wiki/{title}\">"
                                                      "{title}</a>\n"
                                                      "Foydalanuvchi: {user}\n"
@@ -47,16 +46,15 @@ async def get_last_created_page(bot, collwikis):
                                                                             newlen=page['newlen'],
                                                                             vaqt=vaqt.strftime("%H:%M:%S")),
                                        parse_mode="HTML", disable_web_page_preview=True)
-            else:
-                await bot.send_message(channel_link, "<a href=\"{fountain_link}\">Fountainda yangi maqola</a>\n"
-                                                     "Nomi: <a href=\"https://uz.wikipedia.org/wiki/{title}\">"
-                                                     "{title}</a>\n"
-                                                     "Foydalanuvchi: {user}\n"
-                                                     "Vaqti: {vaqt}".format(title=page['title'].replace('Munozara:', ''), # noqa
-                                                                            user=page['user'],
-                                                                            vaqt=vaqt.strftime("%H:%M:%S"),
-                                                                            fountain_link=fountain_link),
-                                       parse_mode="HTML", disable_web_page_preview=True)
+            #    await bot.send_message(channel_link, "<a href=\"{fountain_link}\">Fountainda yangi maqola</a>\n"
+            #                                         "Nomi: <a href=\"https://uz.wikipedia.org/wiki/{title}\">"
+            #                                         "{title}</a>\n"
+            #                                         "Foydalanuvchi: {user}\n"
+            #                                         "Vaqti: {vaqt}".format(title=page['title'].replace('Munozara:', ''), # noqa
+            #                                                                user=page['user'],
+            #                                                                vaqt=vaqt.strftime("%H:%M:%S"),
+            #                                                                fountain_link=fountain_link),
+            #                           parse_mode="HTML", disable_web_page_preview=True)
     else:
         logging.info("NO CHANGES")
 
