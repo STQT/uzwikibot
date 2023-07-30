@@ -11,7 +11,7 @@ Example: [Here](https://t.me/uzwikinewpages)
 - GIT
 
 #### Preparations
-- Clone this repo via `git clone https://github.com/qayrat-sultan/aiogram-template`;
+- Clone this repo via `git clone https://github.com/stqt/uzwikibot.git`;
 - Move to the directory `cd aiogram-template`.
 
 #### Virtualenv deployment
