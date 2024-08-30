@@ -26,7 +26,7 @@ async def clean_up_database(collwikis):
     document_limit = 250
     if total_documents > document_limit:
         # Calculate how many documents need to be deleted
-        documents_to_delete = total_documents - document_limit
+        documents_to_delete = total_documents - document_limit - 50
         # Find the oldest documents based on the timestamp
         oldest_documents = collwikis.find({}).sort('timestamp', 1).limit(documents_to_delete)
         # Extract the _id of the documents to be deleted
