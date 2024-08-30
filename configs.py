@@ -29,6 +29,7 @@ cluster = motor.motor_tornado.MotorClient(MONGO_URL)
 collusers = cluster.chatbot.users
 collreports = cluster.chatbot.reports
 collwikis = cluster.chatbot.wikis
+colledits = cluster.chatbot.edits
 
 
 # Telegam supported types
@@ -52,7 +53,7 @@ if not os.getenv("DEBUG"):
 async def on_startup(dp):
     scheduler = AsyncIOScheduler(timezone=str(get_localzone()))
     scheduler.start()
-    set_scheduled_jobs(scheduler, dp.bot, collwikis)
+    set_scheduled_jobs(scheduler, dp.bot, collwikis, colledits)
     for i in ADMIN_IDS:
         try:
             await dp.bot.send_message(i, "Bot are start!")
