@@ -70,6 +70,7 @@ class WikiApi:
             "rclimit": self.last_pages_limit_edits,  # Limit the results to the last 20 edits
             "uselang": "uz",
             "format": "json",
+            "rcdir": "older",
         }
 
         R = self.S.get(url=self.URL, params=EDITS_PARAMS)
