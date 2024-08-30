@@ -99,11 +99,16 @@ async def get_last_edited_pages(bot, collwikis, colledits):
             size = edit['newlen'] - edit['oldlen']
             size = f"+{size}" if size > 0 else str(size)
             formatted_time = datetime.strptime(edit['timestamp'], "%Y-%m-%dT%H:%M:%SZ") + timedelta(hours=5)
+            diff_url = (
+                f"https://uz.wikipedia.org/w/index.php?title={edit['title'].replace(' ', '_')}"
+                f"&curid={edit['pageid']}&diff={edit['revid']}&oldid={edit['old_revid']}"
+            )
             text = (
                 f"<b>Maqola:</b> <a href=\"https://uz.wikipedia.org/wiki/{edit['title']}\">{edit['title']}</a>\n"
                 f"<b>O‘zgargan hajm:</b> {size}\n"
                 f"<b>Foydalanuvchi:</b> {edit['user']}\n"
-                f"<b>Vaqti:</b> {formatted_time.strftime('%H:%M:%S')}"
+                f"<b>Vaqti:</b> {formatted_time.strftime('%H:%M:%S')}\n"
+                f"<b>O‘zgarishlarni ko‘rish:</b> <a href=\"{diff_url}\">Farqini ko‘rish</a>"
             )
             # Send the message to the Telegram channel
             await bot.send_message(channel_link_edit, text, parse_mode="HTML", disable_web_page_preview=True)
