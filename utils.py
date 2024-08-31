@@ -10,7 +10,7 @@ class WikiApi:
     S = requests.Session()
     URL = "https://uz.wikipedia.org/w/api.php"
     last_pages_limit = "10"
-    last_pages_limit_edits = "25"
+    last_pages_limit_edits = "10"
 
     def __init__(self):
         self.login_request()
