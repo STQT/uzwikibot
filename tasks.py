@@ -20,21 +20,22 @@ async def clean_up_database(collwikis):
     based on the timestamp field.
     """
     # Count total documents in the collection
-    total_documents = await collwikis.count_documents({})
-
-    # Define the document limit
-    document_limit = 250
-    if total_documents > document_limit:
-        # Calculate how many documents need to be deleted
-        documents_to_delete = total_documents - document_limit - 50
-        # Find the oldest documents based on the timestamp
-        oldest_documents = collwikis.find({}).sort('timestamp', 1).limit(documents_to_delete)
-        # Extract the _id of the documents to be deleted
-        oldest_ids = [doc['_id'] for doc in await oldest_documents.to_list(length=documents_to_delete)]
-        # Delete the documents with the collected _id values
-        await collwikis.delete_many({'_id': {'$in': oldest_ids}})
-        # Log the deletion
-        logging.info(f"Deleted {documents_to_delete} old documents from collwikis.")
+    # total_documents = await collwikis.count_documents({})
+    #
+    # # Define the document limit
+    # document_limit = 250
+    # if total_documents > document_limit:
+    #     # Calculate how many documents need to be deleted
+    #     documents_to_delete = total_documents - document_limit - 50
+    #     # Find the oldest documents based on the timestamp
+    #     oldest_documents = collwikis.find({}).sort('timestamp', 1).limit(documents_to_delete)
+    #     # Extract the _id of the documents to be deleted
+    #     oldest_ids = [doc['_id'] for doc in await oldest_documents.to_list(length=documents_to_delete)]
+    #     # Delete the documents with the collected _id values
+    #     await collwikis.delete_many({'_id': {'$in': oldest_ids}})
+    #     # Log the deletion
+    #     logging.info(f"Deleted {documents_to_delete} old documents from collwikis.")
+    pass
 
 
 async def get_last_created_page(bot, collwikis, colledits):

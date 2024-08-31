@@ -16,7 +16,7 @@ from configs import BOT_TOKEN, MONGO_URL
 class SetReport(StatesGroup):
     report = State()
 
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(level=logging.DEBUG)
 bot = Bot(BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 storage = MongoStorage(uri=MONGO_URL)
 dp = Dispatcher(bot, storage=storage)
