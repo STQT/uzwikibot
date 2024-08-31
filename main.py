@@ -10,13 +10,13 @@ import admin_commands
 import configs
 import handlers
 
-from configs import BOT_TOKEN, MONGO_URL
+from configs import BOT_TOKEN, MONGO_URL, DEBUG
 
 
 class SetReport(StatesGroup):
     report = State()
-
-logging.basicConfig(level=logging.DEBUG)
+logging_level = logging.DEBUG if DEBUG else logging.WARNING
+logging.basicConfig(level=logging_level)
 bot = Bot(BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 storage = MongoStorage(uri=MONGO_URL)
 dp = Dispatcher(bot, storage=storage)

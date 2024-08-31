@@ -16,6 +16,7 @@ load_dotenv()
 
 # Main telegram bot configs
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+DEBUG = os.getenv("DEBUG", False)
 
 
 # Telegram chats
