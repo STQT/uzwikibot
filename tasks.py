@@ -10,8 +10,8 @@ interval_seconds = 10
 interval_seconds_edits = 5
 database_list_limit = 20
 database_list_limit_edit = 20
-channel_link = "@uzwikinewpages"
-channel_link_edit = "@uzwikinewedits"
+channel_link = "@wikinewpages"
+channel_link_edit = "@wikinewedits"
 
 
 async def clean_up_database(collwikis):
